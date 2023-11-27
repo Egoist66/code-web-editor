@@ -15,7 +15,7 @@ type PanelControlsProps = {
 export const PanelControls: FC<PanelControlsProps> = memo(({ id, onClearEditorCache, onChangeScreen, isFullscreen, isExpanded, setOpenEditor }) => {
 
      const fileRef = useRef<HTMLInputElement>(null)
-     const { error, isLoading, uploadFile } = useFiles()
+     const { error, isLoading, uploadFile } = useFiles(fileRef)
 
      const watchUploading = () => {
           if(isLoading){

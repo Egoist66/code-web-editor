@@ -1,8 +1,8 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, RefObject, useState } from 'react';
 import { useAppDispatch } from '../store/store';
 import { onChangeEditorValues } from '../store/slices/editor-top-panel';
 
-export const useFiles = () => {
+export const useFiles = (ref: RefObject<HTMLInputElement>) => {
 
      const [fileData, setFileData] = useState<string>('')
      const [error, setError] = useState<boolean>(false)
@@ -18,7 +18,6 @@ export const useFiles = () => {
                reader.readAsText(file)
 
                reader.addEventListener('load', () => {
-
                     setLoading(true)
                     setError(false)
                     const data = reader?.result
@@ -29,11 +28,21 @@ export const useFiles = () => {
                                    setFileData(data)
                                    dispatch(onChangeEditorValues({id, value: data}))
                               }
-                              catch (e) {
+                              catch (error) {
                                    setError(true)
+                                   console.log(error);
+                                   ref.current?.value
+                                   
+
                               }
                               finally {
                                    setLoading(false)
+                                   if(ref.current){
+                                        ref.current.value = ''
+                                   }
+
+
+
                               }
 
                               clearTimeout(timer)
