@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, memo, useCallback, useEffect } from "react";
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/xml/xml'
@@ -18,7 +18,8 @@ import 'codemirror/mode/javascript/javascript'
 
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 import { useAppDispatch } from "../store/store";
-import { onChangeEditorFullScreen, onChangeEditorValues, onChangeExpansion, onClearCache} from "../store/slices/editor-top-panel";
+import { onChangeEditorFullScreen, onChangeEditorValues, onChangeExpansion, onClearCache } from "../store/slices/editor-top-panel";
+import { PanelControls } from "./PanelControls";
 
 type EditorPropsType = {
      id: string,
@@ -29,13 +30,14 @@ type EditorPropsType = {
      language: 'xml' | 'css' | 'javascript'
 }
 
-export const EditorContainer: FC<EditorPropsType> = ({ title, isFullscreen, values, id, language, isExpanded }) => {
+export const EditorContainer: FC<EditorPropsType> = memo(({ title, isFullscreen, values, id, language, isExpanded }) => {
 
      const dispatch = useAppDispatch()
+   
 
-     const onClearEditorCache = () => {
+     const onClearEditorCache = useCallback(() => {
           dispatch(onClearCache())
-     }
+     }, [])
 
      const exitFullScreenbyEscape = (e: KeyboardEvent) => {
 
@@ -44,20 +46,21 @@ export const EditorContainer: FC<EditorPropsType> = ({ title, isFullscreen, valu
           }
      }
 
-     const setOpenEditor = (id: string) => {
+     const setOpenEditor = useCallback((id: string) => {
           return () => {
                dispatch(onChangeExpansion({ id }))
           }
-     }
-     const onChangeScreen = () => {
-          dispatch(onChangeEditorFullScreen({ id, isFullscreen: true }))
-     }
+     }, [id])
 
-     const onChangeValues = (values: string) => {
+     const onChangeScreen = useCallback(() => {
+          dispatch(onChangeEditorFullScreen({ id, isFullscreen: true }))
+     }, [isFullscreen])
+
+     const onChangeValues = useCallback((values: string) => {
 
           dispatch(onChangeEditorValues({ id, value: values }))
 
-     }
+     }, [values])
 
      useEffect(() => {
           if (isFullscreen) {
@@ -75,28 +78,18 @@ export const EditorContainer: FC<EditorPropsType> = ({ title, isFullscreen, valu
           <div className={`editor-container ${isExpanded ? '' : 'collapsed'}`}>
                <div className="editor-title">
                     <p>{title}</p>
-                    
-                    <div className="controls-panel">
-                         <button
-                              style={{ borderColor: !isExpanded ? 'crimson' : 'orange', color: !isExpanded ? 'crimson' : 'orange' }}
-                              onClick={setOpenEditor(id)}
-                         >
-                              Toggle
-                         </button>
-                         <button
-                              style={{ borderColor: isFullscreen ? 'crimson' : 'orange', color: isFullscreen ? 'crimson' : 'orange' }}
-                              onClick={onChangeScreen}
-                         >
-                              Fullscreen
-                         </button>
 
-                         {id === '1' ? <button
-                              style={{ borderColor: 'orange', color: 'orange' }}
-                              onClick={onClearEditorCache}
-                         >
-                              Очистить кеш
-                         </button>: null}
-                    </div>
+
+                    <PanelControls
+                         isExpanded={isExpanded}
+                         isFullscreen={isFullscreen}
+                         onChangeScreen={onChangeScreen}
+                         id={id}
+                         onClearEditorCache={onClearEditorCache}
+                         setOpenEditor={setOpenEditor}
+
+                    />
+
                </div>
 
                <ControlledEditor
@@ -138,6 +131,6 @@ export const EditorContainer: FC<EditorPropsType> = ({ title, isFullscreen, valu
           </div>
 
      )
-}
+})
 
 

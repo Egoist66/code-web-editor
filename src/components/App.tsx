@@ -1,8 +1,8 @@
-import { FC } from "react"
+import { FC, memo } from "react"
 import { TopPanelContainer } from "./TopPanel"
 import { OutPutPanel } from "./OutPutPanel"
 
-const App: FC = () => {
+export const App: FC = memo(() => {
 
   return (
     <>
@@ -12,7 +12,6 @@ const App: FC = () => {
 
     </>
   )
-}
+})
 
 
-export default App

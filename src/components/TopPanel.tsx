@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { EditorsElements } from "../store/slices/editor-top-panel";
 import { useAppSelector } from "../store/store";
 import { EditorContainer } from "./Editor";
@@ -7,7 +7,7 @@ type TopPanelViewProps = {
      editors: EditorsElements[]
 }
 
-export const TopPanelContainer: FC = () => {
+export const TopPanelContainer: FC = memo(() => {
      const  editors = useAppSelector(state => state.editors)
 
 
@@ -15,7 +15,7 @@ export const TopPanelContainer: FC = () => {
 
           <TopPanelView editors={editors} />
      )
-}
+})
 
 
 
@@ -24,7 +24,7 @@ export const TopPanelContainer: FC = () => {
 
 
 
-const TopPanelView: FC<TopPanelViewProps> = ({ editors }) => {
+const TopPanelView: FC<TopPanelViewProps> = memo(({ editors }) => {
           
 
      return (
@@ -48,4 +48,4 @@ const TopPanelView: FC<TopPanelViewProps> = ({ editors }) => {
 
           </div>
      )
-}
+})

@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { useAppSelector } from "../store/store";
 
-export const OutPutPanel: FC = () => {
+export const OutPutPanel: FC = memo(() => {
      const editors = useAppSelector(state => state.editors)
      const [srcDocValue, setSrcDoc] = useState<string>('')
 
@@ -13,7 +13,7 @@ export const OutPutPanel: FC = () => {
           useEffect(() => {
                const timer = setTimeout(() => {
                     setSrcDoc(`
-               <html>
+               <html style="font-size: 16px; font-family: 'Arial'">
                
                     <body>${html}</body>
                     <style>${css}</style>
@@ -44,4 +44,4 @@ export const OutPutPanel: FC = () => {
                </iframe>
           </div>
      )
-}
+})

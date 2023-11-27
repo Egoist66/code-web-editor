@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import App from './components/App.tsx'
+import {App} from './components/App.tsx'
 import './styles/index.scss'
 import { Provider } from 'react-redux'
 import { persistor, store } from './store/store.ts';
