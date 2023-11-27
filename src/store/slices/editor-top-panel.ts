@@ -16,7 +16,7 @@ export type EditorsPanel = {
 
 const initialState: EditorsPanel = {
      editors: [
-          { id: '1', isFullScreen: false, language: 'xml', title: 'HTML', isExpanded: true, values: '' },
+          { id: '1', isFullScreen: false, language: 'xml', title: 'HTML', isExpanded: true, values: '<div></div>' },
           { id: '2', isFullScreen: false,  language: 'css', title: 'CSS', isExpanded: true, values: '' },
           { id: '3', isFullScreen: false, language: 'javascript', title: 'JS', isExpanded: true, values: '' },
      ]
@@ -41,9 +41,10 @@ const EditorTopPanelSlice = createSlice({
           },
 
           onClearCache(state: EditorsPanel){
-               state.editors = state.editors.map(e => (
-                    {...e, values: '', isExpanded: true}
-               ))
+              
+               state.editors[0].values = '<div></div>'
+               state.editors[1].values = ''
+               state.editors[2].values = ''
           }
      },
 

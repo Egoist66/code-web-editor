@@ -119,7 +119,6 @@ export const EditorContainer: FC<EditorPropsType> = ({ title, isFullscreen, valu
                          autoCloseTags: true,
                          showHint: true,
                          hintOptions: {
-                              completeSingle: false,
                               extraKeys: {
                                    'Ctrl-Space': 'autocomplete'
                               }
