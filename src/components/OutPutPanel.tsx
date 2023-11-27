@@ -35,7 +35,7 @@ export const OutPutPanel: FC = memo(() => {
                     srcDoc={srcDocValue}
                     title="output"
                     frameBorder="0"
-                    sandbox="allow-scripts"
+                    sandbox="allow-scripts allow-modals"
                     width={'100%'}
                     height={'100%'}
 
