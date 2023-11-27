@@ -10,3 +10,10 @@ export type onChangeEditorValueAction = {
           value: string
      }
 }
+
+export type onChangeEditorScrenAction = {
+     payload: {
+          id: string,
+          isFullscreen: boolean
+     }
+}

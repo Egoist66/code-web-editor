@@ -20,6 +20,18 @@ body {
   }
 }
 
+p {
+  margin: 0;
+}
+.controls-panel {
+  display: flex;
+  gap: 20px;
+}
+
+.react-codemirror2 {
+  font-size: 16px !important;
+}
+
 .editor-container {
   flex-grow: 1;
   flex-basis: 0;

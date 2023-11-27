@@ -36,6 +36,7 @@ const TopPanelView: FC<TopPanelViewProps> = ({ editors }) => {
                     <EditorContainer
                          key={e.id}
                          language={e.language}
+                         isFullscreen={e.isFullScreen}
                          values={e.values}
                          id={e.id}
                          isExpanded={e.isExpanded}
