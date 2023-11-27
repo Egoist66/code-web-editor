@@ -49,7 +49,7 @@ export const EditorContainer: FC<EditorPropsType> = ({ title, values, id, langua
 
                <ControlledEditor
                     className="code-mirror-wrapper"
-                    onBeforeChange={(editor, data, value) => onChangeValues(value)}
+                    onBeforeChange={(_editor, _data, value) => onChangeValues(value)}
                     value={values}
                     options={{
                          lineWrapping: true,
