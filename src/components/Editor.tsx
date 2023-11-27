@@ -1,4 +1,4 @@
-import { FC, useDeferredValue, useEffect, useState } from "react";
+import { FC } from "react";
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/xml/xml'
