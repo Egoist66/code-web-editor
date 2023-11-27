@@ -38,11 +38,17 @@ const EditorTopPanelSlice = createSlice({
           onChangeEditorFullScreen(state: EditorsPanel, action: onChangeEditorScrenAction){
                state.editors = state.editors.map(e => e.id === action.payload.id ? { ...e, isFullScreen: action.payload.isFullscreen} : e)
 
+          },
+
+          onClearCache(state: EditorsPanel){
+               state.editors = state.editors.map(e => (
+                    {...e, values: '', isExpanded: true}
+               ))
           }
      },
 
 })
 
-export const { onChangeExpansion, onChangeEditorValues, onChangeEditorFullScreen} = EditorTopPanelSlice.actions
+export const { onChangeExpansion, onClearCache, onChangeEditorValues, onChangeEditorFullScreen} = EditorTopPanelSlice.actions
 export default EditorTopPanelSlice.reducer
 

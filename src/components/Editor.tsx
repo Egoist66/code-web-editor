@@ -18,7 +18,7 @@ import 'codemirror/mode/javascript/javascript'
 
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 import { useAppDispatch } from "../store/store";
-import { onChangeEditorFullScreen, onChangeEditorValues, onChangeExpansion } from "../store/slices/editor-top-panel";
+import { onChangeEditorFullScreen, onChangeEditorValues, onChangeExpansion, onClearCache} from "../store/slices/editor-top-panel";
 
 type EditorPropsType = {
      id: string,
@@ -32,6 +32,10 @@ type EditorPropsType = {
 export const EditorContainer: FC<EditorPropsType> = ({ title, isFullscreen, values, id, language, isExpanded }) => {
 
      const dispatch = useAppDispatch()
+
+     const onClearEditorCache = () => {
+          dispatch(onClearCache())
+     }
 
      const exitFullScreenbyEscape = (e: KeyboardEvent) => {
 
@@ -85,6 +89,13 @@ export const EditorContainer: FC<EditorPropsType> = ({ title, isFullscreen, valu
                          >
                               Fullscreen
                          </button>
+
+                         {id === '1' ? <button
+                              style={{ borderColor: 'orange', color: 'orange' }}
+                              onClick={onClearEditorCache}
+                         >
+                              Очистить кеш
+                         </button>: null}
                     </div>
                </div>
 
