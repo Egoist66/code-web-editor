@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useRef } from "react";
+import { FC, memo, useRef } from "react";
 import { useFiles } from "../hooks/useFiles";
 
 
