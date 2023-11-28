@@ -17,3 +17,9 @@ export type onChangeEditorScrenAction = {
           isFullscreen: boolean
      }
 }
+
+export type onChangeAppView = {
+     payload: {
+          appMode: boolean
+     }
+}

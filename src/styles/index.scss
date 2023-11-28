@@ -2,11 +2,14 @@ body,
 html {
   margin: 0;
   font-family: 'Arial';
+  box-sizing: border-box;
+  position: relative;
 }
 
 body {
   overflow-x: hidden;
 }
+
 .top-pane {
   background-color: hsl(225, 6%, 25%);
 }
@@ -23,6 +26,7 @@ body {
 p {
   margin: 0;
 }
+
 .controls-panel {
   display: flex;
   gap: 20px;
@@ -83,6 +87,10 @@ button {
   border-radius: 0.3rem;
   transition: 0.3s all ease;
 
+  &:focus {
+    outline: none !important;
+  }
+
 
   &:hover {
     color: crimson !important;
@@ -96,8 +104,76 @@ button {
   opacity: 0;
 }
 
+.editor-bar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 0%;
+  background: white;
+  transition: 0.3s all ease;
+  color: black;
+  padding: 0px;
+  min-height: 100vh;
+  z-index: 2222222222;
+  box-shadow: none;
 
-@media(max-width: 1200px){
+  & button {
+    padding: 15px;
+  }
+}
+
+.open.editor-bar {
+  box-shadow: 1px 1px 5px 1px lightgrey;
+  width: 20%;
+  padding: 10px;
+  transition: 0.3s all ease;
+
+  
+}
+
+.float-btn {
+    position: fixed;
+    right: 10px;
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+    background: #253238;
+    bottom: 20px;
+    z-index: 999999999999999;
+
+    &:hover {
+      color: orange !important;
+      width: 100px !important;
+      border-radius: 5px !important;
+      border-color: orange !important;
+    }
+}
+
+
+
+.asrow.pane {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.asrow.editor-container {
+  width: 100% !important;
+  padding: 0px;
+  min-height: 50vh;
+}
+
+.asrow.editor-title {
+  border-radius: 0px !important;
+
+}
+
+.asrow.root {
+   display: flex;
+    justify-content: space-between;
+}
+
+@media(max-width: 1200px) {
   .pane {
     display: block;
     height: auto;

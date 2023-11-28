@@ -20,6 +20,7 @@ const persistedReducer = persistReducer(persistConfig, EditorTopPanelSliceReduce
 
 export const store = configureStore({
      reducer: persistedReducer,
+     devTools: true,
      middleware: (getDefaultMiddleware) =>
           getDefaultMiddleware({
                serializableCheck: {

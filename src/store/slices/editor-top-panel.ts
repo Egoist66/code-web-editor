@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ChangeExpansionAction, onChangeEditorValueAction, onChangeEditorScrenAction } from '../actions/actions';
+import { ChangeExpansionAction, onChangeEditorValueAction, onChangeEditorScrenAction, onChangeAppView } from '../actions/actions';
 
 export type EditorsElements = {
      id: string,
@@ -11,10 +11,12 @@ export type EditorsElements = {
 }
 
 export type EditorsPanel = {
+     appMode: 'column' | 'row',
      editors: Array<EditorsElements>
 }
 
 const initialState: EditorsPanel = {
+     appMode: 'column',
      editors: [
           { id: '1', isFullScreen: false, language: 'xml', title: 'HTML', isExpanded: true, values: '<div></div>' },
           { id: '2', isFullScreen: false,  language: 'css', title: 'CSS', isExpanded: true, values: '' },
@@ -45,11 +47,14 @@ const EditorTopPanelSlice = createSlice({
                state.editors[0].values = '<div></div>'
                state.editors[1].values = ''
                state.editors[2].values = ''
+          },
+          onChangeAppViewMode(state: EditorsPanel, action: onChangeAppView){
+               state.appMode = action.payload.appMode ? 'row' : 'column'
           }
      },
 
 })
 
-export const { onChangeExpansion, onClearCache, onChangeEditorValues, onChangeEditorFullScreen} = EditorTopPanelSlice.actions
+export const { onChangeExpansion, onClearCache, onChangeAppViewMode, onChangeEditorValues, onChangeEditorFullScreen} = EditorTopPanelSlice.actions
 export default EditorTopPanelSlice.reducer
 

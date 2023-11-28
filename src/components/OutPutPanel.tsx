@@ -5,6 +5,10 @@ export const OutPutPanel: FC = memo(() => {
      const editors = useAppSelector(state => state.editors)
      const [srcDocValue, setSrcDoc] = useState<string>('')
 
+     const appMode = useAppSelector(state => state.appMode)
+     const complexClassName = appMode === 'row' ? 'asrow' : 'def'
+
+
      const html = editors[0].values
      const css = editors[1].values
      const js = editors[2].values
@@ -29,7 +33,7 @@ export const OutPutPanel: FC = memo(() => {
           }, [html, css, js])
 
      return (
-          <div className="pane">
+          <div className={`${complexClassName} pane`}>
 
                <iframe
                     srcDoc={srcDocValue}

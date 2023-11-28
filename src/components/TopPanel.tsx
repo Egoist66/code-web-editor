@@ -5,15 +5,19 @@ import { EditorContainer } from "./Editor";
 
 type TopPanelViewProps = {
      editors: EditorsElements[]
+     appMode: 'column' | 'row'
 }
 
 export const TopPanelContainer: FC = memo(() => {
      const  editors = useAppSelector(state => state.editors)
+     const appMode = useAppSelector(state => state.appMode)
+   
+
 
 
      return (
 
-          <TopPanelView editors={editors} />
+          <TopPanelView appMode={appMode} editors={editors} />
      )
 })
 
@@ -24,11 +28,13 @@ export const TopPanelContainer: FC = memo(() => {
 
 
 
-const TopPanelView: FC<TopPanelViewProps> = memo(({ editors }) => {
-          
+const TopPanelView: FC<TopPanelViewProps> = memo(({ editors, appMode }) => {
+
+     const complexClassName = appMode === 'row' ? 'asrow' : 'def'
+
 
      return (
-          <div className="pane top-pane">
+          <div className={`${complexClassName} pane top-pane`}>
 
                {editors.map(e => (
 

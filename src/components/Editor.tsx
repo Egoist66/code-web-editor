@@ -17,7 +17,7 @@ import 'codemirror/mode/css/css'
 import 'codemirror/mode/javascript/javascript'
 
 import { Controlled as ControlledEditor } from 'react-codemirror2'
-import { useAppDispatch } from "../store/store";
+import { useAppDispatch, useAppSelector } from "../store/store";
 import { onChangeEditorFullScreen, onChangeEditorValues, onChangeExpansion, onClearCache } from "../store/slices/editor-top-panel";
 import { PanelControls } from "./PanelControls";
 
@@ -33,7 +33,10 @@ type EditorPropsType = {
 export const EditorContainer: FC<EditorPropsType> = memo(({ title, isFullscreen, values, id, language, isExpanded }) => {
 
      const dispatch = useAppDispatch()
+     const appMode = useAppSelector(state => state.appMode)
    
+     const complexClassName = appMode === 'row' ? 'asrow' : 'def'
+
 
      const onClearEditorCache = useCallback(() => {
           dispatch(onClearCache())
@@ -63,6 +66,20 @@ export const EditorContainer: FC<EditorPropsType> = memo(({ title, isFullscreen,
      }, [values])
 
      useEffect(() => {
+          console.log(appMode);
+          
+          let root = document.querySelector('.root')as HTMLElement
+          if(appMode === 'row'){
+               root?.setAttribute('class', 'asrow root')
+          }
+          else{
+               root?.setAttribute('class', 'root')
+          }
+
+
+     }, [appMode])
+
+     useEffect(() => {
           if (isFullscreen) {
                window.addEventListener('keydown', exitFullScreenbyEscape)
           }
@@ -75,8 +92,8 @@ export const EditorContainer: FC<EditorPropsType> = memo(({ title, isFullscreen,
 
 
      return (
-          <div className={`editor-container ${isExpanded ? '' : 'collapsed'}`}>
-               <div className="editor-title">
+          <div className={`${complexClassName} editor-container ${isExpanded ? '' : 'collapsed'}`}>
+               <div className={`${complexClassName} editor-title`}>
                     <p>{title}</p>
 
 
