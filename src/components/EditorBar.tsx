@@ -11,7 +11,7 @@ export const EditorBar: FC = memo(() => {
 
 
      const toggleBar = (e: KeyboardEvent) => {
-          if (e.key === 'B' || e.key === 'b') {
+          if (e.key === 'B') {
                setOpenBar(isOpenBar => !isOpenBar)
           }
           else {

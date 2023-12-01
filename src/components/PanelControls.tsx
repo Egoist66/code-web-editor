@@ -75,6 +75,7 @@ export const PanelControls: FC<PanelControlsProps> = memo(({ id, onClearEditorCa
                     Toggle
                </button>
                <button
+                    id="full"
                     title="Press 'Escape' to turn fullscreen mode off"
                     style={{ borderColor: isFullscreen ? 'crimson' : 'orange', color: isFullscreen ? 'crimson' : 'orange' }}
                     onClick={onChangeScreen}

@@ -91,8 +91,19 @@ export const EditorContainer: FC<EditorPropsType> = memo(({ title, isFullscreen,
      }, [isFullscreen])
 
 
+     const evalAppModeStyleToggle = () => {
+
+          switch(appMode){
+               case 'column':
+                    return `${isExpanded ? '' : 'collapsed'}`
+               case "row": {
+                    return `${isExpanded ? '' : 'row-editor-active'}`
+               }
+          }
+     }
+
      return (
-          <div className={`${complexClassName} editor-container ${isExpanded ? '' : 'collapsed'}`}>
+          <div className={`${complexClassName} editor-container ${evalAppModeStyleToggle()}`}>
                <div className={`${complexClassName} editor-title`}>
                     <p>{title}</p>
 
